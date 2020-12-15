@@ -2,10 +2,10 @@ package tasks
 
 import (
 	"fmt"
-	"net/http"
-
 	prom "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"net/http"
+	_ "net/http/pprof"
 )
 
 var (
