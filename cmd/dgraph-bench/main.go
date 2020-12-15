@@ -3,16 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/dgraph-io/dgo/v200"
+	"github.com/dgraph-io/dgo/v200/protos/api"
+	"github.com/linuxerwang/dgraph-bench/tasks"
+	"google.golang.org/grpc"
+	yaml "gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
-
-	"github.com/dgraph-io/dgo"
-	"github.com/dgraph-io/dgo/protos/api"
-	"github.com/linuxerwang/dgraph-bench/tasks"
-	"google.golang.org/grpc"
-	yaml "gopkg.in/yaml.v2"
 )
 
 var (

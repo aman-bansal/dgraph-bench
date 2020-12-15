@@ -13,10 +13,10 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func RandString(n int, r *rand.Rand) string {
+func RandString(n int) string {
 	b := make([]rune, n)
 	for i := range b {
-		b[i] = letterRunes[r.Intn(len(letterRunes))]
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
 	}
 	return string(b)
 }

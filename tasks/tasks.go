@@ -2,15 +2,13 @@ package tasks
 
 import (
 	"fmt"
-	"math/rand"
+	"github.com/dgraph-io/dgo/v200"
 	"sync/atomic"
 	"time"
-
-	"github.com/dgraph-io/dgo"
 )
 
 // BenchmarkCase ...
-type BenchmarkCase func(dgraphCli *dgo.Dgraph, r *rand.Rand) error
+type BenchmarkCase func(dgraphCli *dgo.Dgraph) error
 
 var (
 	BenchTasks = map[string]BenchmarkCase{}
@@ -33,7 +31,6 @@ func ExecTask(name string, bc BenchmarkCase, dgraphCli *dgo.Dgraph, concurrency 
 	go report(name, &count)
 	for i := 0; i < concurrency; i++ {
 		go func() {
-			r := rand.New(rand.NewSource(time.Now().Unix()))
 			for {
 				func() {
 					defer func() {
@@ -43,7 +40,7 @@ func ExecTask(name string, bc BenchmarkCase, dgraphCli *dgo.Dgraph, concurrency 
 					}()
 
 					start := time.Now()
-					err := bc(dgraphCli, r)
+					err := bc(dgraphCli)
 					d := time.Since(start)
 
 					status := "OK"

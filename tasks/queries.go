@@ -3,11 +3,11 @@ package tasks
 import (
 	"context"
 	"fmt"
+	"github.com/dgraph-io/dgo/v200"
 	"math/rand"
 	"strconv"
 	"time"
 
-	"github.com/dgraph-io/dgo"
 )
 
 const (
@@ -53,10 +53,10 @@ func init() {
 	BenchTasks["get-friends-two-hop"] = GetFriendsTwoHop
 }
 
-func GetFriendsOneHop(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
+func GetFriendsOneHop(dgraphCli *dgo.Dgraph) error {
 	start := time.Now()
 
-	uid := r.Int63n(MaxUid)
+	uid := rand.Int63n(MaxUid)
 	txn := dgraphCli.NewReadOnlyTxn()
 	resp, err := txn.QueryWithVars(context.Background(), qlGetFriendsOneHop, map[string]string{"$a": strconv.FormatInt(uid, 10)})
 	if err != nil {
@@ -75,10 +75,10 @@ func GetFriendsOneHop(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
 	return nil
 }
 
-func GetFriendsTwoHop(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
+func GetFriendsTwoHop(dgraphCli *dgo.Dgraph) error {
 	start := time.Now()
 
-	uid := r.Int63n(MaxUid)
+	uid := rand.Int63n(MaxUid)
 	txn := dgraphCli.NewReadOnlyTxn()
 	resp, err := txn.QueryWithVars(context.Background(), qlGetFriendsTwoHop, map[string]string{"$a": strconv.FormatInt(uid, 10)})
 	if err != nil {

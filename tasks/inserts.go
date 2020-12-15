@@ -4,13 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/dgraph-io/dgo/v200"
+	"github.com/dgraph-io/dgo/v200/protos/api"
 	"math/rand"
 	"strconv"
 	"sync/atomic"
 	"time"
-
-	"github.com/dgraph-io/dgo"
-	"github.com/dgraph-io/dgo/protos/api"
 )
 
 const (
@@ -26,13 +25,13 @@ func init() {
 	BenchTasks["insert-person"] = InsertPerson
 }
 
-func InsertFriend(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
+func InsertFriend(dgraphCli *dgo.Dgraph) error {
 	start := time.Now()
 
-	auid := r.Int63n(MaxUid)
-	buid := r.Int63n(MaxUid)
+	auid := rand.Int63n(MaxUid)
+	buid := rand.Int63n(MaxUid)
 	for auid == buid {
-		buid = r.Int63n(MaxUid)
+		buid = rand.Int63n(MaxUid)
 	}
 
 	// fmt.Printf("%d is friend of %d\n", auid, buid)
@@ -72,7 +71,7 @@ func InsertFriend(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
 	return nil
 }
 
-func InsertPerson(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
+func InsertPerson(dgraphCli *dgo.Dgraph) error {
 	start := time.Now()
 
 	xid := strconv.FormatInt(atomic.AddInt64(&personXid, 1), 10)
@@ -80,7 +79,7 @@ func InsertPerson(dgraphCli *dgo.Dgraph, r *rand.Rand) error {
 	person := &Person{
 		Uid:       "_:" + xid,
 		Xid:       xid,
-		Name:      RandString(10, r),
+		Name:      RandString(10),
 		CreatedAt: start.Unix(),
 		UpdatedAt: start.Unix(),
 	}
