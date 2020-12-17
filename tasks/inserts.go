@@ -29,8 +29,11 @@ func InsertFriend(dgraphCli *dgo.Dgraph) error {
 	start := time.Now()
 
 	auid := rand.Int63n(MaxUid)
+	for auid == 0 {
+		auid = rand.Int63n(MaxUid)
+	}
 	buid := rand.Int63n(MaxUid)
-	for auid == buid {
+	for auid == buid || buid == 0 {
 		buid = rand.Int63n(MaxUid)
 	}
 

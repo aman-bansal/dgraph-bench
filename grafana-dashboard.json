@@ -182,7 +182,7 @@
         {
           "expr": "rate(dgraph_people_query_count[5m])",
           "interval": "",
-          "legendFormat": "Query Rate",
+          "legendFormat": "",
           "refId": "B"
         }
       ],
@@ -190,7 +190,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Mutation Per Sec",
+      "title": "Request Per Sec",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -291,7 +291,7 @@
         {
           "expr": "dgraph_people_query_throughput",
           "interval": "",
-          "legendFormat": "speed per second",
+          "legendFormat": "",
           "queryType": "randomWalk",
           "refId": "A"
         }
@@ -387,7 +387,7 @@
         {
           "expr": "rate(dgraph_people_query_duration_sum[5m])\n/\n  rate(dgraph_people_query_duration_count[5m])",
           "interval": "",
-          "legendFormat": "average request time",
+          "legendFormat": "",
           "queryType": "randomWalk",
           "refId": "A"
         }
@@ -442,12 +442,12 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
-    "to": "now"
+    "from": "2020-12-15T13:25:21.765Z",
+    "to": "2020-12-15T14:01:02.594Z"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Insert Person",
+  "title": "Benchmarks Metric Distribution",
   "uid": "A5ByMEJGz",
-  "version": 2
+  "version": 3
 }
